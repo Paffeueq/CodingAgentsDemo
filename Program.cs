@@ -5,6 +5,39 @@
 // 1) CLI test mode: pass username and password as command-line arguments (for automated smoke tests)
 // 2) Interactive mode: prompts the user for username and password
 
+// Moduł: Prosty demo logowania
+//
+// Cel:
+// - Pokazać prosty proces walidacji danych logowania oraz przykładowe uwierzytelnianie
+//   w konsolowej aplikacji demonstracyjnej.
+//
+// Co zawiera kod:
+// - ValidateCredentials(username, password, out error): waliduje nazwę użytkownika i hasło
+//   według reguł opisanych poniżej i zwraca czytelny komunikat o błędzie.
+// - Authenticate(username, password): prosty, lokalny sklep użytkowników (in-memory)
+//   użyty tylko do demonstracji. Nie stosować w produkcji.
+// - Tryb CLI: jeśli program uruchomiony z dwoma argumentami, traktuje je jako
+//   username i password (przydatne do automatycznych testów).
+// - Tryb interaktywny: wczytuje username i hasło od użytkownika; hasło jest wczytywane bez echa.
+//
+// Reguły walidacji (domyślne):
+// - username: wymagany, min. 3 znaki, dozwolone znaki: litery, cyfry, '.', '_' i '-'.
+// - password: wymagany, min. 8 znaków, musi zawierać co najmniej jedną dużą literę,
+//   jedną małą literę, jedną cyfrę oraz jeden znak specjalny.
+//
+// Uwaga i bezpieczeństwo:
+// - Ten przykład przechowuje hasła jawnie w pamięci wyłącznie do celów demonstracyjnych.
+//   W środowisku produkcyjnym użyj silnego hashowania haseł (Argon2, bcrypt) i bezpiecznego
+//   repozytorium użytkowników (baza danych).
+// - Rozważyć dodatkowe zabezpieczenia: limit prób logowania, blokada konta, rate-limiting,
+//   logowanie zdarzeń i szyfrowanie kanału komunikacji.
+//
+// Szybkie przykłady uruchomienia:
+// - Tryb testowy (argumenty):
+//   dotnet run --project <ścieżka-do-projektu> alice P@ssw0rd1
+// - Tryb interaktywny:
+//   dotnet run --project <ścieżka-do-projektu>
+
 using System.Text.RegularExpressions;
 
 Console.WriteLine("Login demo\n");
